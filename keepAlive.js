@@ -2,7 +2,7 @@
 import { CronJob } from 'cron';
 import https from 'https';
 
-const backendURL = 'https://is-moayad-asleep.onrender.com'; // Replace with your backend URL
+const backendURL = 'https://is-moayad-asleep.onrender.com/status'; // Replace with your backend URL
 const job = new CronJob('*/14 * * * * *', function () {
     console.log('Pinging server to keep it alive');
     
