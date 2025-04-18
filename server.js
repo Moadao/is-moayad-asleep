@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+// Import the cron job to keep the server alive
+import './keepAlive.js';
 
 // Load environment variables
 dotenv.config();
