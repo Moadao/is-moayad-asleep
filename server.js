@@ -1,8 +1,21 @@
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+const statusPassword = process.env.STATUS_PASSWORD;
+
+// Ensure password is configured
+if (!statusPassword) {
+  console.error('ERROR: STATUS_PASSWORD environment variable must be set');
+  process.exit(1);
+}
 
 app.use(cors());
 app.use(express.json());
@@ -22,7 +35,7 @@ app.get('/status', (req, res) => {
 app.post('/status', (req, res) => {
   const { status, password } = req.body;
 
-  if (password !== 'supersecret') {
+  if (password !== statusPassword) {
     return res.status(403).json({ error: 'Forbidden' });
   }
 
